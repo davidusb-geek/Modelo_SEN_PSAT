@@ -4,9 +4,6 @@ clc
 
 % Preamble:
 % Definir los "paths" de PSAT y de cualquier otro toolbox a utilizar
-% En este caso se usa tambien el toolbox "xticklabel_rotate" para graficar
-% los nombres de las barras en un angulo deseado (se puede descargar este
-% toolbox de forma gratuita desde el filexchange del matlabcentral)
 
 addpath(genpath('C:\Users\davidusb\Documents\MATLAB')) % La carpeta con todos los toolbox utilizados
 % DEBE MODIFICARSE LA DIRECCION DE LA CARPETA (PATH) EN CUALQUIER OTRA PC
@@ -84,7 +81,10 @@ figure, plot(Vbus_vector,'bo-','LineWidth',2), hold on, plot(Vbus_angles,'rs-','
 plot(vmax,'k--','LineWidth',2), plot(vmin,'k--','LineWidth',2)
 ylabel('Modulo (pu) y Angulo (rad) de tension') %,'interpreter','latex'
 set(gca,'YGrid','on','YTick',[-0.6:0.1:1.2],'Box','off')
-xticklabel_rotate([1:7],45,Vbus_names); %,'interpreter','latex'
+set(get(gca,'xlabel'), 'Rotation',90) 
+xticks([1:7]);
+xticklabels(Vbus_names);
+xtickangle(45);
 legend('Modulo (pu)','Angulo (rad)','V_{max} 105%','V_{min} 95%') %,'interpreter','latex'
 
 % Voltajes en 230 y 115 kV region Los Andes:
@@ -301,7 +301,12 @@ plot(Vbus_vector,'bo-','LineWidth',2), hold on, plot(Vbus_angles,'rs-','LineWidt
 plot(vmax,'k--','LineWidth',2), plot(vmin,'k--','LineWidth',2)
 ylabel('Modulo (pu) y Angulo (rad) de tension') %,'interpreter','latex'
 set(gca,'YGrid','on','YTick',[-1:0.1:1.2],'Box','off','XLim',[0 66],'YLim',[-1 1.2])
-xticklabel_rotate([1:65],90,Vbus_names,'Fontsize',8); %,'interpreter','latex'
+
+ax = gca; % Get current axes
+ax.XAxis.FontSize = 8;
+xticks([1:65]);
+xticklabels(Vbus_names);
+xtickangle(90);
 legend('Modulo (pu)','Angulo (rad)','V_{max} 105%','V_{min} 95%','Location','SouthWest','Orientation','horizontal') %,'interpreter','latex'
 
 
